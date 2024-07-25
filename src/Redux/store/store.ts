@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import adminEvaluationReducer from "../slice/slice" 
+import adminEvaluationReducer from "../slice/adminEvaluation"
 
 export const store = configureStore({
   reducer: {
-    adminEvaluation: adminEvaluationReducer, 
+    adminEvaluation: adminEvaluationReducer , 
   },
 });
 
