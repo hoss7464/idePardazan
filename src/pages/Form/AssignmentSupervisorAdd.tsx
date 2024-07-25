@@ -1,11 +1,17 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
+import "./SelectFields/SelectedFields.css"
+
+//---------------------------------------------------------------------------------------------------
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import AssignmentSupervieorGetData from '../../hooks/AssignmentSupervisor/AssignmentSupervisorGetData';
 import { MultiSelect } from 'react-multi-select-component';
 import AssignmentSupervisorStore from '../../hooks/AssignmentSupervisor/AssignmentSupervisorStore';
 import AssignmentSupervieorList from '../../hooks/AssignmentSupervisor/AssignmentSupervisorList';
 import AssignmentSupervieorDelete from '../../hooks/AssignmentSupervisor/AssignmentSupervisorDelete';
+import SearchableSelect from './SelectFields/SearchableSelect';
+import CustomSelect from './SelectFields/CustomSelect';
+//----------------------------------------------------------------------------------------------------
 
 const CustomMultiSelect = ({ dataEmployee, selected, setSelected }) => {
   const customItemRenderer = ({ checked, option, onClick }) => (
@@ -97,6 +103,46 @@ const AssignmentSupervisorAdd: React.FC = () => {
   const [selected, setSelected] = useState([]);
   const [dataShow, setDataShow] = useState<object[] | null>([]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      await getAdminPeriodListData();
+      await getEmployeeListData();
+      await getSupervisorListData();
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const newEmployementList = selected.map((item) => parseInt(item.value));
+    setEmployementList(newEmployementList);
+  }, [selected]);
+
+  const customItemRenderer = ({ checked, option, onClick }) => (
+    <div className="custom-item" onClick={onClick}>
+      <input type="checkbox" checked={checked} readOnly />
+      <span>{option.label}</span>
+    </div>
+  );
+
+  const customSelectedRenderer = (selected, options) => {
+    return (
+      <div className="custom-selected-list">
+        {selected.map((item) => (
+          <div key={item.value} className="custom-selected-item">
+            {item.label}
+            <button
+              onClick={() =>
+                setSelected(selected.filter((s) => s.value !== item.value))
+              }
+              className="remove-btn"
+            ></button>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
   const handleAdd = async () => {
     await AssignmentStore(period, supervisor, employementList);
   };
@@ -120,20 +166,6 @@ const AssignmentSupervisorAdd: React.FC = () => {
       await getAdminSADeletebasedPeriodSupervisor(supervisor, period);
     }
   };
-  useEffect(() => {
-    const fetchData = async () => {
-      await getAdminPeriodListData();
-      await getEmployeeListData();
-      await getSupervisorListData();
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const newEmployementList = selected.map((item) => parseInt(item.value));
-    setEmployementList(newEmployementList);
-  }, [selected]);
 
   useEffect(() => {
     setDataShow(dataBasedPeriod);
@@ -142,6 +174,62 @@ const AssignmentSupervisorAdd: React.FC = () => {
   useEffect(() => {
     setDataShow(dataBasedSupervisor);
   }, [dataBasedSupervisor]);
+  //-------------------------------------------------------------------------------
+
+  const options = [
+    { value: 'فاطمه فاطمی', label: 'فاطمه فاطمی' },
+    { value: 'فاطمه یوسفی', label: 'فاطمه یوسفی' },
+    { value: 'علیرضا خاتمی', label: 'علیرضا خاتمی' },
+    { value: 'محمد ملکی', label: 'محمد ملکی' },
+  ];
+
+  const options2 = [
+    { value: 'بهار 1403', label: 'بهار 1403' },
+    { value: 'پاییز 1402', label: 'پاییز 1402' },
+    { value: 'تابستان 1402', label: 'تابستان 1402' },
+  ];
+
+  const options3 = [
+    { value: 'item1', label: 'item1' },
+    { value: 'item2', label: 'item2' },
+    { value: 'item3', label: 'item3' },
+    { value: 'item4', label: 'item4' },
+    { value: 'item5', label: 'item5' },
+    { value: 'item6', label: 'item6' },
+    { value: 'item7', label: 'item7' },
+    { value: 'item8', label: 'item8' },
+    { value: 'item9', label: 'item9' },
+    { value: 'item10', label: 'item10' },
+    { value: 'item11', label: 'item11' },
+    { value: 'item12', label: 'item12' },
+    { value: 'item13', label: 'item13' },
+    { value: 'item14', label: 'item14' },
+    { value: 'item15', label: 'item15' },
+    { value: 'item16', label: 'item16' },
+  ];
+  const [selectedOptions, setSelectedOptions] = useState<{
+    select1: OptionType | null;
+    select2: OptionType | null;
+  }>({
+    select1: null,
+    select2: null,
+  });
+
+  const handleChange =
+    (selectName: 'select1' | 'select2') => (option: OptionType | null) => {
+      setSelectedOptions((prevState) => ({
+        ...prevState,
+        [selectName]: option,
+      }));
+    };
+
+  const [selectedTags, setSelectedTags] = useState<any[]>([]);
+
+  const handleChangeTags = (selected: any[] | null) => {
+    setSelectedTags(selectedTags || []);
+  };
+
+  //--------------------------------------------------------------------------------
 
   return (
     <>
@@ -155,118 +243,46 @@ const AssignmentSupervisorAdd: React.FC = () => {
                   دوره
                 </label>
 
-                <div className="relative z-10 bg-white dark:bg-form-input">
-                  <select
-                    value={period || ''}
-                    onChange={(e) => {
-                      setPeriod(e.target.value);
-                      setIsOptionSelected(true);
-                    }}
-                    className={`relative z-10 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input ${isOptionSelected ? 'text-black dark:text-white' : ''
-                      }`}
-                  >
-                    <option
-                      value=""
-                      disabled
-                      className="text-body dark:text-bodydark"
-                    >
-                      دوره
-                    </option>
-                    {dataPeriod.map((item: any, index: number) => (
-                      <option
-                        value={item.id}
-                        className="text-body dark:text-bodydark"
-                      >
-                        {item.name}
-                      </option>
-                    ))}
-                  </select>
-
-                  <span className="absolute top-1/2 left-4 z-10 -translate-y-1/2">
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <g opacity="0.8">
-                        <path
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                          d="M5.29289 8.29289C5.68342 7.90237 6.31658 7.90237 6.70711 8.29289L12 13.5858L17.2929 8.29289C17.6834 7.90237 18.3166 7.90237 18.7071 8.29289C19.0976 8.68342 19.0976 9.31658 18.7071 9.70711L12.7071 15.7071C12.3166 16.0976 11.6834 16.0976 11.2929 15.7071L5.29289 9.70711C4.90237 9.31658 4.90237 8.68342 5.29289 8.29289Z"
-                          fill="#637381"
-                        ></path>
-                      </g>
-                    </svg>
-                  </span>
-                </div>
+                <SearchableSelect
+                  options={options2}
+                  value={selectedOptions.select1}
+                  onChange={handleChange('select1')}
+                  myPlaceHolder="دوره"
+                  myClass = "selected-field"
+                />
               </div>
             </div>
+
             <div className="w-full xl:w-1/2">
               <div>
                 <label className="mb-0.5 block text-black dark:text-white">
                   ارزیابی کننده
                 </label>
 
-                <div className="relative z-10 bg-white dark:bg-form-input">
-                  <select
-                    value={supervisor || ''}
-                    onChange={(e) => {
-                      setSupervisor(e.target.value);
-                      setIsOptionSelected(true);
-                    }}
-                    className={`relative z-10 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input ${isOptionSelected ? 'text-black dark:text-white' : ''
-                      }`}
-                  >
-                    <option
-                      value=""
-                      disabled
-                      className="text-body dark:text-bodydark"
-                    >
-                      ارزیابی کننده
-                    </option>
-                    {dataSupervisor.map((item: any, index: number) => (
-                      <option
-                        value={item.id}
-                        className="text-body dark:text-bodydark"
-                      >
-                        {item.full_name}
-                      </option>
-                    ))}
-                  </select>
-
-                  <span className="absolute top-1/2 left-4 z-10 -translate-y-1/2">
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <g opacity="0.8">
-                        <path
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                          d="M5.29289 8.29289C5.68342 7.90237 6.31658 7.90237 6.70711 8.29289L12 13.5858L17.2929 8.29289C17.6834 7.90237 18.3166 7.90237 18.7071 8.29289C19.0976 8.68342 19.0976 9.31658 18.7071 9.70711L12.7071 15.7071C12.3166 16.0976 11.6834 16.0976 11.2929 15.7071L5.29289 9.70711C4.90237 9.31658 4.90237 8.68342 5.29289 8.29289Z"
-                          fill="#637381"
-                        ></path>
-                      </g>
-                    </svg>
-                  </span>
-                </div>
+                
+                  <SearchableSelect
+                    options={options}
+                    value={selectedOptions.select2}
+                    onChange={handleChange('select2')}
+                    myPlaceHolder="یک گزینه انتخاب کنید"
+                    myClass = "selected-field2"
+                  />
+                
               </div>
             </div>
           </div>
-          <label className="mb-0.5 block text-black dark:text-white">
-            ارزیابی
-          </label>
 
-          <CustomMultiSelect
-            dataEmployee={dataEmployee}
-            selected={selected}
-            setSelected={setSelected}
-          />
+          <div className="w-full">
+            <div>
+              <label className="mb-0.5 block text-black dark:text-white">
+                ارزیابی
+              </label>
+
+              <div className="relative z-10 bg-white dark:bg-form-input">
+              <CustomSelect options={options3} placeholder="انتخاب کنید" />
+              </div>
+            </div>
+          </div>
 
           <button
             type="button"
@@ -360,7 +376,24 @@ const AssignmentSupervisorAdd: React.FC = () => {
                                           handleDeleteItem(item.id);
                                         }}
                                       >
-                                        <img src='/src/components/Icon/delete.svg' />
+                                        <svg
+                                          width="20px"
+                                          strokeWidth="2"
+                                          height="20px"
+                                          viewBox="0 0 1024 1024"
+                                          className="icon"
+                                          version="1.1"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                          <path
+                                            d="M960 160h-291.2a160 160 0 0 0-313.6 0H64a32 32 0 0 0 0 64h896a32 32 0 0 0 0-64zM512 96a96 96 0 0 1 90.24 64h-180.48A96 96 0 0 1 512 96zM844.16 290.56a32 32 0 0 0-34.88 6.72A32 32 0 0 0 800 320a32 32 0 1 0 64 0 33.6 33.6 0 0 0-9.28-22.72 32 32 0 0 0-10.56-6.72zM832 416a32 32 0 0 0-32 32v96a32 32 0 0 0 64 0v-96a32 32 0 0 0-32-32zM832 640a32 32 0 0 0-32 32v224a32 32 0 0 1-32 32H256a32 32 0 0 1-32-32V320a32 32 0 0 0-64 0v576a96 96 0 0 0 96 96h512a96 96 0 0 0 96-96v-224a32 32 0 0 0-32-32z"
+                                            fill="#FF5C5D"
+                                          />
+                                          <path
+                                            d="M384 768V352a32 32 0 0 0-64 0v416a32 32 0 0 0 64 0zM544 768V352a32 32 0 0 0-64 0v416a32 32 0 0 0 64 0zM704 768V352a32 32 0 0 0-64 0v416a32 32 0 0 0 64 0z"
+                                            fill="#FF5C5D"
+                                          />
+                                        </svg>
                                       </button>
                                     </td>
                                   </tr>
