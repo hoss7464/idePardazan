@@ -6,13 +6,27 @@ import EvalIndicatorDelete from '../../hooks/EvalIndicator/EvalIndicatorDelete';
 import EvalIndicatorUpdate from '../../hooks/EvalIndicator/EvalIndicatorUpdate';
 import EvalIndicatorAdd from '../../hooks/EvalIndicator/EvalIndicatorAdd';
 import EvalParamList from '../../hooks/EvalParam/EvalParamList';
+import PopUpInput from './EvalIndicatorFiles/PopUpInput';
+import EvalError from './EvalIndicatorFiles/EvalError';
+import EvalModal from './EvalIndicatorFiles/EvalModal';
+import ModalTopic from './EvalIndicatorFiles/ModalTopc';
+import ModalInput from './EvalIndicatorFiles/ModalInput';
+import PopupCloseBtn from './EvalIndicatorFiles/PopupCloseBtn';
+import PopupAddBtn from './EvalIndicatorFiles/PopupAddBtn';
+import EvalListTopics from './EvalIndicatorFiles/EvalListTopics';
+import { Link } from 'react-router-dom';
+import { GuyehIcon } from './EvalIndicatorFiles/EvalIndicatorStyles';
 
 const EvalIndicator: React.FC = () => {
+  //-----------------------------------------------------------------------------------
+  //States :
   const { error, dataIndicator, getEvalIndicatorListData } =
     EvalIndicatorList();
+
   const { errorParam, dataParam, getEvalParamListData } = EvalParamList();
   const { deleteEvalIndicator, errordelete } = EvalIndicatorDelete();
   const { updateEvalIndicator, errorUpdateIndicator } = EvalIndicatorUpdate();
+
   const { addEvalIndicator, errorCreateIndicator } = EvalIndicatorAdd();
 
   const [addModal, setaddModal] = useState(false);
@@ -20,16 +34,20 @@ const EvalIndicator: React.FC = () => {
   const [updateModal, setupdateModal] = useState(false);
   const [deleteModal, setdeleteModal] = useState(false);
   const [selectedIndicator, setselectedIndicator] = useState<any>(null);
+
   const [newIndicatorTitle, setnewIndicatorTitle] = useState('');
+
   const [newIndicatorEvalParamId, setnewIndicatorEvalParamId] =
     useState<any>(null);
   const [newIndicatorGoal, setnewIndicatorGoal] = useState('');
-
   const [searchTerm, setSearchTerm] = useState('');
   const [goal, setGoal] = useState('');
+  
   const [evalParamId, setevalParamId] = useState<number | null>(null);
-  const [isOptionSelected, setIsOptionSelected] = useState<boolean>(false);
 
+  const [isOptionSelected, setIsOptionSelected] = useState<boolean>(false);
+  //-----------------------------------------------------------------------------------
+  //Functions :
   const handleDelete = async (id: string) => {
     await deleteEvalIndicator(id);
     setdeleteModal(false);
@@ -63,7 +81,7 @@ const EvalIndicator: React.FC = () => {
       >
         {' '}
         پرینت
-        <img src='/src/components/Icon/print.svg' />
+        <img src="/src/components/Icon/print.svg" />
       </button>
     );
   };
@@ -92,43 +110,33 @@ const EvalIndicator: React.FC = () => {
       setnewIndicatorGoal(selectedIndicator.goal);
     }
   }, [selectedIndicator]);
+  //------------------------------------------------------------------------------------
 
   return (
     <>
-      <input
-        type="text"
-        placeholder="جستجو کنید..."
-        className="w-full rounded-lg border-[1.5px] border-stroke bg-white py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary mb-4"
-        value={searchTerm}
-        onChange={(event) => {
+      {/* search input */}
+      <PopUpInput
+        myType="text"
+        myPlaceHolder="جستجو کنید..."
+        myVal={searchTerm}
+        myOnChnage={(event) => {
           setSearchTerm(event.target.value);
         }}
       />
+      {/* Error for form */}
+      {errorUpdateIndicator && <EvalError myError={errorUpdateIndicator} />}
+      {/*breadcrumb */}
+      <Breadcrumb />
 
-      {errorUpdateIndicator && (
-        <div
-          className="flex fixed justify-between items-center p-4 mb-4 text-sm text-white rounded-lg bg-red-400 dark:bg-gray-800 dark:text-red-400"
-          role="alert"
-        >
-          <div>
-            <img src='/src/components/Icon/error.svg' />
-            <span className="font-medium ml-10">خطا! </span>
-          </div>
-          {errorUpdateIndicator}
-        </div>
-      )}
-
-      <Breadcrumb pageName="شاخصهای ارزیابی" />
       <div className="flex justify-between w-full">
-        <button
-          className="inline-flex rounded-md items-center justify-center  bg-meta-3 py-3 px-3 text-center font-medium text-white hover:bg-opacity-90 ml-2 mb-5 btnCustmColor"
-          type="button"
-          onClick={() => {
+        {/*Modal click btn on page */}
+        <EvalModal
+          addModalText="افزودن شاخص"
+          myModalFuncClick={() => {
             setaddModal(true);
           }}
-        >
-          افزودن شاخص
-        </button>
+        />
+        {/*print Modal click btn on page */}
         <PrintTableButton tableRef={tableRef} />
       </div>
 
@@ -137,28 +145,21 @@ const EvalIndicator: React.FC = () => {
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none  text-sm">
             <div className="relative my-6 mx-auto w-1/3">
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                <div className="flex items-start justify-between p-5 border-b border-solid border-zinc-200 rounded-t">
-                  <h3 className="text-xl font-semibold">نمایش شاخص</h3>
-
-                  <button className="" onClick={() => setaddModal(false)}>
-                    <img src='/src/components/Icon/close.svg' />
-
-                  </button>
-                </div>
-
-                <div className="relative  px-6 py-3  flex-auto text-right">
-                  <p className="my-4 text-blueGray-500 text-md leading-relaxed  mb-0.5">
-                    نام شاخص
-                  </p>
-                  <input
-                    type="text"
-                    placeholder="نام شاخص"
-                    value={newIndicatorTitle}
-                    onChange={(e) => setnewIndicatorTitle(e.target.value)}
-                    className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                  />
-                </div>
-
+                {/*Modal topic */}
+                <ModalTopic
+                  modalTopicText="نمایش شاخص"
+                  modalTopicCloseBtn={() => setaddModal(false)}
+                />
+                {/*Modal input */}
+                <ModalInput
+                  ModalInputLabel="نام شاخص"
+                  ModalInputPlaceholder="نام شاخص"
+                  ModalInputValue={newIndicatorTitle}
+                  ModalInputFunc={(event) =>
+                    setnewIndicatorTitle(event.target.value)
+                  }
+                />
+                {/*Modal select list */}
                 <div className="relative  px-6 py-3 flex-auto text-right">
                   <p className="my-4 text-blueGray-500 text-md leading-relaxed  mb-0.5">
                     پارامتر ارزیابی
@@ -168,8 +169,9 @@ const EvalIndicator: React.FC = () => {
                     onChange={(e) => {
                       setevalParamId(Number(e.target.value));
                     }}
-                    className={`relative z-10 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input ${isOptionSelected ? 'text-black dark:text-white' : ''
-                      }`}
+                    className={`relative z-10 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input ${
+                      isOptionSelected ? 'text-black dark:text-white' : ''
+                    }`}
                   >
                     <option
                       value=""
@@ -178,7 +180,8 @@ const EvalIndicator: React.FC = () => {
                     >
                       پارامتر ارزیابی
                     </option>
-                    {dataParam.map((item: any, index: number) => (
+
+                    {dataParam.map((item: any) => (
                       <option
                         value={item.id}
                         className="text-body dark:text-bodydark"
@@ -188,36 +191,23 @@ const EvalIndicator: React.FC = () => {
                     ))}
                   </select>
                 </div>
-
-                <div className="relative  px-6 py-3  flex-auto text-right">
-                  <p className="my-4 text-blueGray-500 text-md leading-relaxed  mb-0.5">
-                    هدف شاخص
-                  </p>
-                  <input
-                    type="text"
-                    placeholder="هدف شاخص"
-                    value={goal}
-                    onChange={(e) => setGoal(e.target.value)}
-                    className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                  />
-                </div>
-
+                {/*Modal input */}
+                <ModalInput
+                  ModalInputLabel="هدف شاخص"
+                  ModalInputPlaceholder="هدف شاخص"
+                  ModalInputValue={goal}
+                  ModalInputFunc={(event) => setGoal(event.target.value)}
+                />
+                {/*Popup Add & Close Button */}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-zinc-200 rounded-b">
-                  <button
-                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => setaddModal(false)}
-                  >
-                    بستن
-                  </button>
-
-                  <button
-                    className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 btnCustmColor"
-                    type="button"
-                    onClick={() => handleAdd(newIndicatorTitle)}
-                  >
-                    افزودن شاخص
-                  </button>
+                  <PopupCloseBtn
+                    PopupCloseBtnText="بستن"
+                    PopupCloseBtnFunc={() => setaddModal(false)}
+                  />
+                  <PopupAddBtn
+                    PopupAddBtnText="افزودن شاخص"
+                    PopupAddBtnFunc={() => handleAdd(newIndicatorTitle)}
+                  />
                 </div>
               </div>
             </div>
@@ -234,39 +224,17 @@ const EvalIndicator: React.FC = () => {
           <div className="rounded-xl border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
             <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
               <div className="flex flex-col">
-                <div className="-m-1.5 overflow-x-auto">
-                  <div className="p-1.5 min-w-full inline-block align-middle">
-                    <div className="overflow-hidden">
+                <div className="-m-1.5 overflow-x-auto ">
+                  <div className="p-1.5 min-w-full inline-block align-middle ">
+                    <div className="overflow-hidden ">
                       <table className="min-w-full divide-y divide-bg-zinc-200 dark:divide-bg-zinc-200 border-zinc-200">
-                        <thead>
-                          <tr>
-                            <th
-                              scope="col"
-                              className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-5/6"
-                            >
-                              نام شاخص
-                            </th>
-                            <th
-                              scope="col"
-                              className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-5/6"
-                            >
-                              پارامتر ارزیابی
-                            </th>
-                            <th
-                              scope="col"
-                              className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-5/6"
-                            >
-                              هدف
-                            </th>
-
-                            <th
-                              scope="col"
-                              className="px-6 py-3 text-center text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-1/6"
-                            >
-                              عملیات
-                            </th>
-                          </tr>
-                        </thead>
+                        {/*Topics for add to list*/}
+                        <EvalListTopics
+                          listTopicName="نام شاخص"
+                          listTopParameter="پارامتر شاخص"
+                          listTopicGoal="هدف"
+                          listTopicOperation="عملیات"
+                        />
 
                         <tbody className="divide-y divide-gray-200 dark:divide-neutral-700 border-zinc-200">
                           {(filteredData ? filteredData : dataIndicator).map(
@@ -282,7 +250,16 @@ const EvalIndicator: React.FC = () => {
                                   {item.goal}
                                 </td>
 
-                                <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium border-zinc-200">
+                                <td className=" py-4 whitespace-nowrap text-end text-sm font-medium border-zinc-200">
+                                  <Link to="/evalIndicator/evalIndicatorGuyeh">
+                                    <button
+                                      className="inline-flex items-center justify-center rounded-md bg-violet-200 py-2 px-2 text-center font-medium text-white hover:bg-opacity-90 ml-2"
+                                      type="button"
+                                    >
+                                     <GuyehIcon />
+                                    </button>
+                                  </Link>
+
                                   <button
                                     className="inline-flex items-center justify-center rounded-md bg-teal-100	 py-2 px-2 text-center font-medium text-white hover:bg-opacity-90 ml-2"
                                     type="button"
@@ -291,11 +268,11 @@ const EvalIndicator: React.FC = () => {
                                       setshowListModal(true);
                                     }}
                                   >
-                                    <img src='/src/components/Icon/add.svg' />
-
+                                    <img src="/src/components/Icon/add.svg" />
                                   </button>
+
                                   {showListModal &&
-                                    selectedIndicator?.id === item.id ? (
+                                  selectedIndicator?.id === item.id ? (
                                     <>
                                       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
                                         <div className="relative my-6 mx-auto w-1/3	">
@@ -311,8 +288,7 @@ const EvalIndicator: React.FC = () => {
                                                   setshowListModal(false)
                                                 }
                                               >
-                                                <img src='/src/components/Icon/close.svg' />
-
+                                                <img src="/src/components/Icon/close.svg" />
                                               </button>
                                             </div>
                                             <div className="relative  px-6 py-3  flex-auto text-right">
@@ -351,18 +327,17 @@ const EvalIndicator: React.FC = () => {
                                   ) : null}
 
                                   <button
-                                    className="inline-flex items-center justify-center rounded-md bg-cyan-100	 py-2 px-2 text-center font-medium text-white hover:bg-opacity-90 ml-2"
+                                    className="inline-flex items-center  justify-center rounded-md bg-cyan-100	 py-2 px-2 text-center font-medium text-white hover:bg-opacity-90 ml-2"
                                     type="button"
                                     onClick={() => {
                                       setselectedIndicator(item);
                                       setupdateModal(true);
                                     }}
                                   >
-                                    <img src='/src/components/Icon/update.svg' />
-
+                                    <img src="/src/components/Icon/update.svg" />
                                   </button>
                                   {updateModal &&
-                                    selectedIndicator?.id === item.id ? (
+                                  selectedIndicator?.id === item.id ? (
                                     <>
                                       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
                                         <div className="relative my-6 mx-auto  w-1/3">
@@ -378,7 +353,7 @@ const EvalIndicator: React.FC = () => {
                                                   setupdateModal(false)
                                                 }
                                               >
-                                                <img src='/src/components/Icon/close.svg' />
+                                                <img src="/src/components/Icon/close.svg" />
                                               </button>
                                             </div>
                                             <div className="relative  px-6 py-3  flex-auto text-right">
@@ -408,10 +383,11 @@ const EvalIndicator: React.FC = () => {
                                                     Number(e.target.value),
                                                   );
                                                 }}
-                                                className={`relative z-10 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input ${isOptionSelected
-                                                  ? 'text-black dark:text-white'
-                                                  : ''
-                                                  }`}
+                                                className={`relative z-10 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input ${
+                                                  isOptionSelected
+                                                    ? 'text-black dark:text-white'
+                                                    : ''
+                                                }`}
                                               >
                                                 <option
                                                   value=""
@@ -492,12 +468,11 @@ const EvalIndicator: React.FC = () => {
                                       setdeleteModal(true);
                                     }}
                                   >
-                                    <img src='/src/components/Icon/delete.svg' />
-
+                                    <img src="/src/components/Icon/delete.svg" />
                                   </button>
 
                                   {deleteModal &&
-                                    selectedIndicator?.id === item.id ? (
+                                  selectedIndicator?.id === item.id ? (
                                     <>
                                       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
                                         <div className="relative my-6 mx-auto  w-1/3">
@@ -513,7 +488,7 @@ const EvalIndicator: React.FC = () => {
                                                   setdeleteModal(false)
                                                 }
                                               >
-                                                <img src='/src/components/Icon/close.svg' />
+                                                <img src="/src/components/Icon/close.svg" />
                                               </button>
                                             </div>
                                             <div className="relative p-6 flex-auto text-right">

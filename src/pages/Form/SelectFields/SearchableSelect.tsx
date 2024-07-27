@@ -1,22 +1,27 @@
 import React from 'react';
 import Select from 'react-select';
-import "./SelectedFields.css"
+import './SelectedFields.css';
 
 interface OptionType {
   value: string;
   label: string;
-  
 }
 
 interface SearchableSelectProps {
   options: OptionType[];
   value: OptionType | null;
   onChange: (option: OptionType | null) => void;
-  myPlaceHolder : string
-  myClass : string
+  myPlaceHolder: string;
+  myClass: string;
 }
 
-const SearchableSelect: React.FC<SearchableSelectProps> = ({ options, value, onChange, myPlaceHolder, myClass }) => {
+const SearchableSelect: React.FC<SearchableSelectProps> = ({
+  options,
+  value,
+  onChange,
+  myPlaceHolder,
+  myClass,
+}) => {
   return (
     <Select
       options={options}

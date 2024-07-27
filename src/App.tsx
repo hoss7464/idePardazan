@@ -30,6 +30,7 @@ import AssignmentSupervisor from './pages/Form/AssignmentSupervisor';
 import AssignmentSupervisorAdd from './pages/Form/AssignmentSupervisorAdd';
 import EvalParam from './pages/Form/EvalParam';
 import EvalIndicator from './pages/Form/EvalIndicator';
+import EvalIndicatorGuyeh from './pages/Form/EvalIndicatorGuyeh';
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -163,7 +164,7 @@ const App: React.FC = () => {
         }
       />
       <Route
-        path="/Members"
+        path="/Member"
         element={
           <PrivateRoute
             element={
@@ -177,7 +178,7 @@ const App: React.FC = () => {
           />
         }
       />
-     
+
       <Route
         path="/Assignment"
         element={
@@ -193,7 +194,7 @@ const App: React.FC = () => {
           />
         }
       />
-       <Route
+      <Route
         path="/evalParam"
         element={
           <PrivateRoute
@@ -208,6 +209,7 @@ const App: React.FC = () => {
           />
         }
       />
+
       <Route
         path="/evalIndicator"
         element={
@@ -223,6 +225,23 @@ const App: React.FC = () => {
           />
         }
       />
+
+      <Route
+        path="/evalIndicator/evalIndicatorGuyeh"
+        element={
+          <PrivateRoute
+            element={
+              <>
+                <DefaultLayout>
+                  <PageTitle title="گویه ها" />
+                  <EvalIndicatorGuyeh />
+                </DefaultLayout>
+              </>
+            }
+          />
+        }
+      />
+
       <Route
         path="/Member/Add"
         element={
