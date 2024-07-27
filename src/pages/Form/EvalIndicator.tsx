@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import { useReactToPrint } from 'react-to-print';
 import EvalIndicatorList from '../../hooks/EvalIndicator/EvalIndicatorList';
@@ -14,10 +15,10 @@ import ModalInput from './EvalIndicatorFiles/ModalInput';
 import PopupCloseBtn from './EvalIndicatorFiles/PopupCloseBtn';
 import PopupAddBtn from './EvalIndicatorFiles/PopupAddBtn';
 import EvalListTopics from './EvalIndicatorFiles/EvalListTopics';
-import { Link } from 'react-router-dom';
 import { GuyehIcon } from './EvalIndicatorFiles/EvalIndicatorStyles';
 
 const EvalIndicator: React.FC = () => {
+  const navigate = useNavigate();
   //-----------------------------------------------------------------------------------
   //States :
   const { error, dataIndicator, getEvalIndicatorListData } =
@@ -26,7 +27,6 @@ const EvalIndicator: React.FC = () => {
   const { errorParam, dataParam, getEvalParamListData } = EvalParamList();
   const { deleteEvalIndicator, errordelete } = EvalIndicatorDelete();
   const { updateEvalIndicator, errorUpdateIndicator } = EvalIndicatorUpdate();
-
   const { addEvalIndicator, errorCreateIndicator } = EvalIndicatorAdd();
 
   const [addModal, setaddModal] = useState(false);
@@ -34,18 +34,15 @@ const EvalIndicator: React.FC = () => {
   const [updateModal, setupdateModal] = useState(false);
   const [deleteModal, setdeleteModal] = useState(false);
   const [selectedIndicator, setselectedIndicator] = useState<any>(null);
-
   const [newIndicatorTitle, setnewIndicatorTitle] = useState('');
-
   const [newIndicatorEvalParamId, setnewIndicatorEvalParamId] =
     useState<any>(null);
   const [newIndicatorGoal, setnewIndicatorGoal] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [goal, setGoal] = useState('');
-  
   const [evalParamId, setevalParamId] = useState<number | null>(null);
-
   const [isOptionSelected, setIsOptionSelected] = useState<boolean>(false);
+  const [selectedId, setSelectedId] = useState<number | null | string>(null);
   //-----------------------------------------------------------------------------------
   //Functions :
   const handleDelete = async (id: string) => {
@@ -55,6 +52,7 @@ const EvalIndicator: React.FC = () => {
 
   const handleAdd = async (title: string) => {
     await addEvalIndicator(title, evalParamId, goal);
+
     setaddModal(false);
     setselectedIndicator('');
   };
@@ -110,6 +108,12 @@ const EvalIndicator: React.FC = () => {
       setnewIndicatorGoal(selectedIndicator.goal);
     }
   }, [selectedIndicator]);
+  //Transfer data based on their title to another page using localStorage
+  const handleButtonClick = (title: string) => {
+    localStorage.setItem('selectedTitle', title.toString());
+    navigate('/evalIndicator/evalIndicatorGuyeh');
+    setSelectedId(title); // Optionally store the selected ID in state
+  };
   //------------------------------------------------------------------------------------
 
   return (
@@ -251,14 +255,15 @@ const EvalIndicator: React.FC = () => {
                                 </td>
 
                                 <td className=" py-4 whitespace-nowrap text-end text-sm font-medium border-zinc-200">
-                                  <Link to="/evalIndicator/evalIndicatorGuyeh">
-                                    <button
-                                      className="inline-flex items-center justify-center rounded-md bg-violet-200 py-2 px-2 text-center font-medium text-white hover:bg-opacity-90 ml-2"
-                                      type="button"
-                                    >
-                                     <GuyehIcon />
-                                    </button>
-                                  </Link>
+                                  <button
+                                    className="inline-flex items-center justify-center rounded-md bg-violet-200 py-2 px-2 text-center font-medium text-white hover:bg-opacity-90 ml-2"
+                                    type="button"
+                                    onClick={() =>
+                                      handleButtonClick(item.title)
+                                    }
+                                  >
+                                    <GuyehIcon />
+                                  </button>
 
                                   <button
                                     className="inline-flex items-center justify-center rounded-md bg-teal-100	 py-2 px-2 text-center font-medium text-white hover:bg-opacity-90 ml-2"
@@ -460,6 +465,19 @@ const EvalIndicator: React.FC = () => {
                                     </>
                                   ) : null}
 
+
+
+
+
+
+
+
+
+
+
+
+                                  
+
                                   <button
                                     className="inline-flex items-center justify-center rounded-md bg-red-100	 py-2 px-2 text-center font-medium text-white hover:bg-opacity-90 ml-2"
                                     type="button"
@@ -470,6 +488,21 @@ const EvalIndicator: React.FC = () => {
                                   >
                                     <img src="/src/components/Icon/delete.svg" />
                                   </button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                                   {deleteModal &&
                                   selectedIndicator?.id === item.id ? (

@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { IoPerson } from 'react-icons/io5';
 import { IoClose } from 'react-icons/io5';
 import { FiPlus } from 'react-icons/fi';
-import { FiMinus } from 'react-icons/fi';
+
+import { FaTrash } from "react-icons/fa";
 
 export const GuyehIcon = styled(IoPerson)`
   width: 20px;
@@ -42,10 +43,10 @@ export const NumberDecrementWrapper = styled.div`
   cursor: pointer;
   padding: 0.5rem;
   border-radius: 4px;
-  background-color: #cffafe;
+  background-color: #FEE2E2;
 `;
-export const NumberDecrement = styled(FiMinus)`
-  color: #8cb2f3;
+export const NumberDecrement = styled(FaTrash)`
+  color: #FF7273;
   width: 24px;
   height: 24px;
 `;
@@ -55,4 +56,21 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 background-color: khaki;
+`
+
+export const GuyehModalLabelWrapper = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+background-color: khaki;
+
+`
+
+export const GuyehModalLabel = styled.h1`
+font-size: 16px;
+
+color: #98A3B2;
+margin-right: 1.5rem;
+margin-top: 1rem;
+margin-bottom: 1rem;
 `
