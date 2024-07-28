@@ -252,20 +252,20 @@ const EvalIndicator: React.FC = () => {
                             </th>
                             <th
                               scope="col"
-                              className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-1/6"
+                              className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-5/6"
                             >
                               پارامتر شاخص
                             </th>
                             <th
                               scope="col"
-                              className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-2/6"
+                              className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-5/6"
                             >
                                هدف
                             </th>
 
                             <th
                               scope="col"
-                              className="px-6 py-3 text-center text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-2/6"
+                              className="px-6 py-3 text-center text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-1/6"
                             >
                               عملیات
                             </th>
