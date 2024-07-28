@@ -102,7 +102,7 @@ const AssignmentSupervisorIndicator: React.FC = () => {
 
 
   const handleAdd = async () => {
-    await AssignmentIndicatorStore(selectedPeriod.value, selectedSupervisor.value, employementList, selectedIndicatorGuyeh.value, Number(weight));
+    await AssignmentIndicatorStore(selectedPeriod.value, selectedSupervisor.value, employementList, se.value, Number(weight));
   };
 
 
@@ -158,7 +158,7 @@ const AssignmentSupervisorIndicator: React.FC = () => {
     fetchData();
   }, [selectedIndicator]);
 
-
+  
 
 
   useEffect(() => {
@@ -264,8 +264,8 @@ const AssignmentSupervisorIndicator: React.FC = () => {
                     value: item.id
                   }))}
                   onChange={(selectedOptions) => {
-                    const selectedIds = selectedOptions?.map(option => option.value);
-                    setEmployementList(selectedIds);
+                    const selectedIds = selectedOptions?.map(option => option.value); 
+                    setEmployementList(selectedIds); 
                   }}
                   placeholder="انتخاب کنید" />
               </div>
@@ -297,9 +297,19 @@ const AssignmentSupervisorIndicator: React.FC = () => {
               </div>
             </div>
 
-            <div className="w-full xl:w-1/2">
+            <div className="w-full xl:w-1/2 mt-2">
+              <CustomInput
+                label="وزن شاخص"
+                value={weight}
+                onChange={setWeight}
+                placeholder="وزن شاخص را وارد کنید"
+              />
+            </div>
+          </div>
+
+          <div className="w-full xl:w-1/2">
               <div>
-                <label className=" mb-0.5 block text-black dark:text-white">
+                <label className="mt-5 mb-0.5 block text-black dark:text-white">
                   گویه ها
                 </label>
 
@@ -321,19 +331,7 @@ const AssignmentSupervisorIndicator: React.FC = () => {
               </div>
             </div>
 
-
-          </div>
-
-          <div className="w-full xl:w-1/2 mt-2">
-            <CustomInput
-              label="وزن شاخص"
-              value={weight}
-              onChange={setWeight}
-              placeholder="وزن شاخص را وارد کنید"
-            />
-          </div>
-
-
+          
 
           <button
             type="button"

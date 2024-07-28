@@ -299,7 +299,7 @@ const AssignmentSupervisorIndicator: React.FC = () => {
 
             <div className="w-full xl:w-1/2">
               <div>
-                <label className=" mb-0.5 block text-black dark:text-white">
+                <label className="mt-5 mb-0.5 block text-black dark:text-white">
                   گویه ها
                 </label>
 

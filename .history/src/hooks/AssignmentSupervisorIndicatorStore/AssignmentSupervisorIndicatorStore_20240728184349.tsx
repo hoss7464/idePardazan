@@ -36,7 +36,7 @@ function AssignmentSupervisorIndicatorStore() {
                         supervisor_id,
                         employee_ids,
                         evaluation_items_id,
-                        impact_weight
+                        Impact_weight
                     }),
                 },
             );

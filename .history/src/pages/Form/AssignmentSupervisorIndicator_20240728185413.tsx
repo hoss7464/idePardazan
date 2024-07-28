@@ -65,8 +65,6 @@ const AssignmentSupervisorIndicator: React.FC = () => {
   const [selectedPeriod, setSelectedPeriod] = useState<any>();
   const [selectedSupervisor, setSelectedSupervisor] = useState<any>();
   const [selectedIndicator, setselectedIndicator] = useState<any>();
-  const [selectedIndicatorGuyeh, setselectedIndicatorGuyeh] = useState<any>();
-
   const [weight, setWeight] = useState<number | null>();
 
   const [period, setPeriod] = useState<number | null>();
@@ -102,7 +100,7 @@ const AssignmentSupervisorIndicator: React.FC = () => {
 
 
   const handleAdd = async () => {
-    await AssignmentIndicatorStore(selectedPeriod.value, selectedSupervisor.value, employementList, selectedIndicatorGuyeh.value, Number(weight));
+    await AssignmentIndicatorStore(selectedPeriod.value, selectedSupervisor.value, employementList, selectedIndicator.value, Number(weight));
   };
 
 
@@ -145,20 +143,6 @@ const AssignmentSupervisorIndicator: React.FC = () => {
 
     fetchData();
   }, [selectedPeriod]);
-
-  useEffect(() => {
-
-    const fetchData = async () => {
-
-      if (selectedIndicator) {
-        await getEvalIndicatorGuyehListData(selectedIndicator.value)
-      }
-    };
-
-    fetchData();
-  }, [selectedIndicator]);
-
-
 
 
   useEffect(() => {
@@ -264,8 +248,8 @@ const AssignmentSupervisorIndicator: React.FC = () => {
                     value: item.id
                   }))}
                   onChange={(selectedOptions) => {
-                    const selectedIds = selectedOptions?.map(option => option.value);
-                    setEmployementList(selectedIds);
+                    const selectedIds = selectedOptions?.map(option => option.value); // استخراج آیدی‌ها
+                    setEmployementList(selectedIds); // ارسال آیدی‌ها به setEmployementList
                   }}
                   placeholder="انتخاب کنید" />
               </div>
@@ -297,43 +281,15 @@ const AssignmentSupervisorIndicator: React.FC = () => {
               </div>
             </div>
 
-            <div className="w-full xl:w-1/2">
-              <div>
-                <label className=" mb-0.5 block text-black dark:text-white">
-                  گویه ها
-                </label>
-
-
-                <SearchableSelect
-                  options={dataIndicatorGuyeh?.map((item: any) => ({
-                    label: item.title,
-                    value: item.id
-                  }))}
-                  value={selectedOptions.select4}
-                  onChange={(option) => {
-                    handleChange('select4')(option);
-                    setselectedIndicatorGuyeh(option);
-                  }}
-                  myPlaceHolder="یک گزینه انتخاب کنید"
-                  myClass="selected-field2"
-                />
-
-              </div>
+            <div className="w-full xl:w-1/2 mt-2">
+              <CustomInput
+                label="وزن شاخص"
+                value={weight}
+                onChange={setWeight}
+                placeholder="وزن شاخص را وارد کنید"
+              />
             </div>
-
-
           </div>
-
-          <div className="w-full xl:w-1/2 mt-2">
-            <CustomInput
-              label="وزن شاخص"
-              value={weight}
-              onChange={setWeight}
-              placeholder="وزن شاخص را وارد کنید"
-            />
-          </div>
-
-
 
           <button
             type="button"

@@ -9,15 +9,14 @@ interface OptionType {
 interface CustomSelectProps {
   options: OptionType[];
   placeholder?: string;
-  onChange: (selected: MultiValue<OptionType> | SingleValue<OptionType>) => void; // اضافه کردن onChange
+  onChange: (selected: MultiValue<OptionType> | SingleValue<OptionType>) => void;
 }
 
-const CustomSelect: React.FC<CustomSelectProps> = ({ options, placeholder, onChange }) => {
+const CustomSelect: React.FC<CustomSelectProps> = ({ options, placeholder }) => {
   const [selectedOptions, setSelectedOptions] = useState<OptionType[]>([]);
 
   const handleChange = (selected: MultiValue<OptionType> | SingleValue<OptionType>) => {
     setSelectedOptions(selected as OptionType[]);
-    onChange(selected); // فراخوانی تابع onChange
   };
 
   const customStyles: StylesConfig<OptionType, true> = {
