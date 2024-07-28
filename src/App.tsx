@@ -227,7 +227,7 @@ const App: React.FC = () => {
       />
 
       <Route
-        path="/evalIndicator/evalIndicatorGuyeh"
+        path="/evalIndicator/evalIndicatorGuyeh/"
         element={
           <PrivateRoute
             element={

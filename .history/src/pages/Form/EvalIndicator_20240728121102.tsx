@@ -43,7 +43,7 @@ const EvalIndicator: React.FC = () => {
   const [newIndicatorGoal, setnewIndicatorGoal] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [goal, setGoal] = useState('');
-
+  
   const [evalParamId, setevalParamId] = useState<number | null>(null);
   const [isOptionSelected, setIsOptionSelected] = useState<boolean>(false);
   const [emptyError, setEmptyError] = useState(false);
@@ -56,18 +56,9 @@ const EvalIndicator: React.FC = () => {
   };
 
   const handleAdd = async (title: string) => {
-
-    if (title !== "" && evalParamId && goal !== "") {
-      await addEvalIndicator(title, evalParamId, goal);
-      setaddModal(false);
-      setselectedIndicator('');
-    } else {
-      setEmptyError(true);
-      setTimeout(() => {
-        setEmptyError(false);
-      }, 4000);
-    }
-
+    await addEvalIndicator(title, evalParamId, goal);
+    setaddModal(false);
+    setselectedIndicator('');
   };
 
   const handleupdate = async (
@@ -271,15 +262,14 @@ const EvalIndicator: React.FC = () => {
                                 </td>
 
                                 <td className=" py-4 whitespace-nowrap text-end text-sm font-medium border-zinc-200">
-                                  <button
-                                    className="inline-flex items-center justify-center rounded-md bg-violet-200 py-2 px-2 text-center font-medium text-white hover:bg-opacity-90 ml-2"
-                                    type="button"
-                                    onClick={() =>
-                                      handleButtonClick(item.title)
-                                    }
-                                  >
-                                    <GuyehIcon />
-                                  </button>
+                                  <Link to="/evalIndicator/evalIndicatorGuyeh">
+                                    <button
+                                      className="inline-flex items-center justify-center rounded-md bg-violet-200 py-2 px-2 text-center font-medium text-white hover:bg-opacity-90 ml-2"
+                                      type="button"
+                                    >
+                                     <GuyehIcon />
+                                    </button>
+                                  </Link>
 
                                   <button
                                     className="inline-flex items-center justify-center rounded-md bg-teal-100	 py-2 px-2 text-center font-medium text-white hover:bg-opacity-90 ml-2"

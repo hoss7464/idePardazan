@@ -6,15 +6,63 @@ import ModalTopic from './EvalIndicatorFiles/ModalTopc';
 import EvalDynamicForm from './EvalIndicatorFiles/EvalDynamicForm';
 import PopupAddBtn from './EvalIndicatorFiles/PopupAddBtn';
 import PopupCloseBtn from './EvalIndicatorFiles/PopupCloseBtn';
+import EvalIndicatorList from '../../hooks/EvalIndicator/EvalIndicatorList';
+import { GuyehModalLabel } from './EvalIndicatorFiles/EvalIndicatorStyles';
+import EvalListTopics from './EvalIndicatorFiles/EvalListTopics';
+
+interface Field {
+  
+  text: string;
+  number: string;
+}
 
 const EvalIndicatorGuyeh: React.FC = () => {
   //States :
   const [searchTerm, setSearchTerm] = useState('');
   const [addModal, setaddModal] = useState<boolean>(false);
-  const [newIndicatorTitle, setnewIndicatorTitle] = useState('');
+  const [fields, setFields] = useState<Field[]>([{ text: '', number: '' }]);
+  const [savedFields, setSavedFields] = useState<Field[]>([]);
+  const { error, dataIndicator, getEvalIndicatorListData } =
+    EvalIndicatorList();
+  const guyehLabel = localStorage.getItem('selectedTitle'); // Get the id from local storage
+
   //-------------------------------------------------------------------------
   //Functions :
-  const handleAdd = async (title: string) => {};
+
+  const handleTextChange = (index: number, value: string) => {
+    const newFields = [...fields];
+    newFields[index].text = value;
+    setFields(newFields);
+  };
+
+  const handleNumberChange = (index: number, value: string) => {
+    const newFields = [...fields];
+    newFields[index].number = value;
+    setFields(newFields);
+  };
+
+  const addField = () => {
+    setFields([...fields, { text: '', number: '' }]);
+  };
+
+  const deleteField = (index: number) => {
+    const newFields = fields.filter((_, i) => i !== index);
+    setFields(newFields);
+  };
+
+  const handleAdd = () => {
+    // Filter out fields with empty text and number, and exclude the prime field (index 0)
+    const filteredFields = fields
+      .filter((field, index) => index !== 0) // Exclude the prime field
+      .filter(
+        (field) => field.text.trim() !== '' && field.number.trim() !== '',
+      ); //ensure both fields are filed
+
+    setSavedFields(filteredFields); // Save filtered fields
+    setaddModal(false); // Close the modal after handling
+    console.log('Data from EvalDynamicForm:', filteredFields);
+  };
+
 
   return (
     <>
@@ -47,17 +95,26 @@ const EvalIndicatorGuyeh: React.FC = () => {
                   modalTopicText="نمایش گویه"
                   modalTopicCloseBtn={() => setaddModal(false)}
                 />
+
+                <GuyehModalLabel>{guyehLabel}</GuyehModalLabel>
+
                 {/*Modal Dynamic Form */}
-                <EvalDynamicForm />
-                
+                <EvalDynamicForm
+                  fields={fields}
+                  onTextChange={handleTextChange}
+                  onNumberChange={handleNumberChange}
+                  onAddField={addField}
+                  onDeleteField={deleteField}
+                />
+
                 <div className="flex items-center justify-end p-6 border-t border-solid border-zinc-200 rounded-b">
                   <PopupCloseBtn
                     PopupCloseBtnText="بستن"
                     PopupCloseBtnFunc={() => setaddModal(false)}
                   />
                   <PopupAddBtn
-                    PopupAddBtnText="افزودن شاخص"
-                    PopupAddBtnFunc={() => handleAdd(newIndicatorTitle)}
+                    PopupAddBtnText="افزودن گویه"
+                    PopupAddBtnFunc={() => handleAdd()}
                   />
                 </div>
               </div>
@@ -66,6 +123,78 @@ const EvalIndicatorGuyeh: React.FC = () => {
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       )}
+
+      {error && <p>Error: {error}</p>}
+
+      <div className="w-full max-w-full rounded-xl border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+        <div className="flex flex-col gap-9 rounded-xl">
+          <div className="rounded-xl border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+            <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
+              <div className="flex flex-col">
+                <div className="-m-1.5 overflow-x-auto ">
+                  <div className="p-1.5 min-w-full inline-block align-middle ">
+                    <div className="overflow-hidden ">
+                      <table className="min-w-full divide-y divide-bg-zinc-200 dark:divide-bg-zinc-200 border-zinc-200">
+                        <EvalListTopics
+                          listTopicName="نام گویه"
+                          listTopParameter="گزاره"
+                          listTopicGoal="امتیاز"
+                          listTopicOperation="عملیات"
+                        />
+                        <tbody className="divide-y divide-gray-200 dark:divide-neutral-700 border-zinc-200">
+                          {savedFields.length > 0 && (
+                            <>
+                              {savedFields.map((field, index) => (
+                                <tr key={index} className="border-zinc-200">
+                                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200 border-zinc-200">
+                                    {guyehLabel}
+                                  </td>
+
+                                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200 border-zinc-200">
+                                    {field.text}
+                                  </td>
+
+                                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200 border-zinc-200">
+                                    {field.number}
+                                  </td>
+
+                                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200 border-zinc-200">
+                                    {/*Add button*/}
+                                    <button
+                                      className="inline-flex items-center justify-center rounded-md bg-teal-100	 py-2 px-2 text-center font-medium text-white hover:bg-opacity-90 ml-2"
+                                      type="button"
+                                    >
+                                      <img src="/src/components/Icon/add.svg" />
+                                    </button>
+                                    {/*Update button*/}
+                                    <button
+                                      className="inline-flex items-center  justify-center rounded-md bg-cyan-100	 py-2 px-2 text-center font-medium text-white hover:bg-opacity-90 ml-2"
+                                      type="button"
+                                    >
+                                      <img src="/src/components/Icon/update.svg" />
+                                    </button>
+                                    {/*Delete button*/}
+                                    <button
+                                      className="inline-flex items-center justify-center rounded-md bg-red-100	 py-2 px-2 text-center font-medium text-white hover:bg-opacity-90 ml-2"
+                                      type="button"
+                                    >
+                                      <img src="/src/components/Icon/delete.svg" />
+                                    </button>
+                                  </td>
+                                </tr>
+                              ))}
+                            </>
+                          )}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
