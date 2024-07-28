@@ -44,7 +44,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({ options, placeholder, onCha
     }),
     menuPortal: (base) => ({
       ...base,
-      zIndex: 100000, // تنظیم z-index برای منوی انتخاب
+      zIndex: 9999, // تنظیم z-index برای منوی انتخاب
     }),
   };
 
