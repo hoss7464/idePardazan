@@ -11,7 +11,6 @@ import { GuyehModalLabel } from './EvalIndicatorFiles/EvalIndicatorStyles';
 import EvalListTopics from './EvalIndicatorFiles/EvalListTopics';
 
 interface Field {
-  
   text: string;
   number: string;
 }
@@ -24,6 +23,7 @@ const EvalIndicatorGuyeh: React.FC = () => {
   const [savedFields, setSavedFields] = useState<Field[]>([]);
   const { error, dataIndicator, getEvalIndicatorListData } =
     EvalIndicatorList();
+    const [title, setTitle] = useState<string>('');
   const guyehLabel = localStorage.getItem('selectedTitle'); // Get the id from local storage
 
   //-------------------------------------------------------------------------
@@ -60,9 +60,9 @@ const EvalIndicatorGuyeh: React.FC = () => {
 
     setSavedFields(filteredFields); // Save filtered fields
     setaddModal(false); // Close the modal after handling
+    console.log('Title:', title); // Log title
     console.log('Data from EvalDynamicForm:', filteredFields);
   };
-
 
   return (
     <>
@@ -85,6 +85,8 @@ const EvalIndicatorGuyeh: React.FC = () => {
         }}
       />
 
+      <p className="mb-6">{guyehLabel}</p>
+
       {addModal && (
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none  text-sm">
@@ -96,7 +98,18 @@ const EvalIndicatorGuyeh: React.FC = () => {
                   modalTopicCloseBtn={() => setaddModal(false)}
                 />
 
-                <GuyehModalLabel>{guyehLabel}</GuyehModalLabel>
+                {/* Title Input Field */}
+                <div className="flex flex-col w-full mt-4 mb-4">
+                  
+                  <input
+                    id="title"
+                    type="text"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    className="w-1/3 mr-6 rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    placeholder="عنوان"
+                  />
+                </div>
 
                 {/*Modal Dynamic Form */}
                 <EvalDynamicForm
@@ -147,7 +160,7 @@ const EvalIndicatorGuyeh: React.FC = () => {
                               {savedFields.map((field, index) => (
                                 <tr key={index} className="border-zinc-200">
                                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200 border-zinc-200">
-                                    {guyehLabel}
+                                    {title}
                                   </td>
 
                                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200 border-zinc-200">

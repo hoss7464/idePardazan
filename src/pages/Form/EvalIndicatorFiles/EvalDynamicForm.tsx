@@ -24,7 +24,7 @@ const EvalDynamicForm: React.FC<EvalDynamicFormProps> = ({
   onTextChange,
   onNumberChange,
   onAddField,
-  onDeleteField
+  onDeleteField,
 }) => {
   return (
     <div className="px-6 py-3 flex text-right">
@@ -33,7 +33,10 @@ const EvalDynamicForm: React.FC<EvalDynamicFormProps> = ({
           {fields.map((field, index) => (
             <div className="flex mb-6" key={index}>
               {index === 0 && (
-                <NumberIncrementWrapper onClick={onAddField} className="self-start">
+                <NumberIncrementWrapper
+                  onClick={onAddField}
+                  className="self-start"
+                >
                   <NumberIncrement />
                 </NumberIncrementWrapper>
               )}
@@ -48,14 +51,14 @@ const EvalDynamicForm: React.FC<EvalDynamicFormProps> = ({
                 placeholder="گویه"
                 value={field.text}
                 onChange={(e) => onTextChange(index, e.target.value)}
-                disabled={index === 0} 
+                disabled={index === 0}
                 className="w-1/2 mr-6 rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
               <input
                 type="number"
                 placeholder="امتیاز"
                 value={field.number}
-                disabled={index === 0} 
+                disabled={index === 0}
                 onChange={(e) => onNumberChange(index, e.target.value)}
                 className="w-1/3 mr-6 rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
