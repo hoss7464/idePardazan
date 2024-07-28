@@ -422,7 +422,7 @@ const EvalIndicatorGuyeh: React.FC = () => {
                                     {field.title}
                                   </td>
 
-                                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200 border-zinc-200 text-center">
+                                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200 border-zinc-200 te">
                                     <button
                                       className="inline-flex items-center justify-center rounded-md bg-teal-100	 py-2 px-2 text-center font-medium text-white hover:bg-opacity-90 ml-2"
                                       type="button"

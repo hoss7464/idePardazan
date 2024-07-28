@@ -286,7 +286,7 @@ const EvalIndicator: React.FC = () => {
                                   {item.goal}
                                 </td>
 
-                                <td className=" py-4  whitespace-nowrap text-center text-sm font-medium border-zinc-200 w-2/6">
+                                <td className=" py-4 flex justify- whitespace-nowrap text-end text-sm font-medium border-zinc-200 w-2/6">
 
                                   <Link
                                     to={`/evalIndicator/evalIndicatorGuyeh/${item.id}`}

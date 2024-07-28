@@ -276,17 +276,17 @@ const EvalIndicator: React.FC = () => {
                           {(filteredData ? filteredData : dataIndicator).map(
                             (item: any, index: number) => (
                               <tr key={index} className="border-zinc-200">
-                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200 border-zinc-200 w-1/6">
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200 border-zinc-200 ">
                                   {item.title}
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200 border-zinc-200 w-1/6">
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200 border-zinc-200">
                                   {item.evaluation_parameter.title}
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200 border-zinc-200 w-2/6">
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200 border-zinc-200">
                                   {item.goal}
                                 </td>
 
-                                <td className=" py-4  whitespace-nowrap text-center text-sm font-medium border-zinc-200 w-2/6">
+                                <td className=" py-4 whitespace-nowrap text-end text-sm font-medium border-zinc-200">
 
                                   <Link
                                     to={`/evalIndicator/evalIndicatorGuyeh/${item.id}`}
