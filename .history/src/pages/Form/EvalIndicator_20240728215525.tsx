@@ -241,7 +241,12 @@ const EvalIndicator: React.FC = () => {
                     <div className="overflow-hidden ">
                       <table className="min-w-full divide-y divide-bg-zinc-200 dark:divide-bg-zinc-200 border-zinc-200">
                         {/*Topics for add to list*/}
-                        
+                        <EvalListTopics
+                          listTopicName="نام شاخص"
+                          listTopParameter="پارامتر شاخص"
+                          listTopicGoal="هدف"
+                          listTopicOperation="عملیات"
+                        />
                         <thead>
                           <tr>
                             <th

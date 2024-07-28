@@ -97,7 +97,7 @@ const EvalIndicator: React.FC = () => {
       >
         {' '}
         پرینت
-        <img src={PrintIcon} />
+        <img src={PrintIcon}/>
       </button>
     );
   };
@@ -241,26 +241,55 @@ const EvalIndicator: React.FC = () => {
                     <div className="overflow-hidden ">
                       <table className="min-w-full divide-y divide-bg-zinc-200 dark:divide-bg-zinc-200 border-zinc-200">
                         {/*Topics for add to list*/}
-                        
-                        <thead>
+                        <EvalListTopics
+                          listTopicName="نام شاخص"
+                          listTopParameter="پارامتر شاخص"
+                          listTopicGoal="هدف"
+                          listTopicOperation="عملیات"
+                        />
+                         <thead>
                           <tr>
                             <th
                               scope="col"
                               className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-5/6"
                             >
-                              نام شاخص
+                              نام و نام خانوادگی
                             </th>
                             <th
                               scope="col"
                               className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-5/6"
                             >
-                              پارامتر شاخص
+                              شماره همراه
                             </th>
                             <th
                               scope="col"
                               className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-5/6"
                             >
-                               هدف
+                              کد پرسنلی
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-5/6"
+                            >
+                              شرکت
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-5/6"
+                            >
+                              عنوان شغلی
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-5/6"
+                            >
+                              سطح سازمانی
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-5/6"
+                            >
+                              واحد سازمانی
                             </th>
 
                             <th
@@ -287,7 +316,7 @@ const EvalIndicator: React.FC = () => {
                                 </td>
 
                                 <td className=" py-4 whitespace-nowrap text-end text-sm font-medium border-zinc-200">
-
+                          
                                   <Link
                                     to={`/evalIndicator/evalIndicatorGuyeh/${item.id}`}
                                     state={item.id}
