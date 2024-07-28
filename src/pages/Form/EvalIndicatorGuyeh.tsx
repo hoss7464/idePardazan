@@ -23,7 +23,7 @@ const EvalIndicatorGuyeh: React.FC = () => {
   const [savedFields, setSavedFields] = useState<Field[]>([]);
   const { error, dataIndicator, getEvalIndicatorListData } =
     EvalIndicatorList();
-    const [title, setTitle] = useState<string>('');
+  const [title, setTitle] = useState<string>('');
   const guyehLabel = localStorage.getItem('selectedTitle'); // Get the id from local storage
 
   //-------------------------------------------------------------------------
@@ -100,7 +100,6 @@ const EvalIndicatorGuyeh: React.FC = () => {
 
                 {/* Title Input Field */}
                 <div className="flex flex-col w-full mt-4 mb-4">
-                  
                   <input
                     id="title"
                     type="text"
