@@ -3,7 +3,7 @@
 export const breadcrumbMappings: Record<string, string> = {
     '/': 'داشبورد /',
     '/addAdmin': 'افزودن ادمین',
-    '/update': 'ویرایش اطلاعات ادمین',
+    '/update/:id': 'ویرایش اطلاعات ادمین',
     '/Member/company': 'شرکت ها',
     '/period': 'دوره ها',
     '/Member/OrganizationUnit': ' واحد سازمانی',
@@ -13,7 +13,7 @@ export const breadcrumbMappings: Record<string, string> = {
     '/AssignmentIndicator':'انتساب شاخص',
     '/evalParam': 'پارامتر های ارزیابی',
     '/evalIndicator': 'شاخص  ارزیابی',
-    '/evalIndicator/evalIndicatorGuyeh': 'گویه ها',
+    '/evalIndicator/evalIndicatorGuyeh/:هی': 'گویه ها',
     '/Member/Add': 'افزودن کاربر',
     '/calendar': 'تقویم',
     '/profile': 'پروفایل',

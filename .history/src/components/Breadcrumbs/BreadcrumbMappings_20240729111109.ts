@@ -3,7 +3,7 @@
 export const breadcrumbMappings: Record<string, string> = {
     '/': 'داشبورد /',
     '/addAdmin': 'افزودن ادمین',
-    '/update': 'ویرایش اطلاعات ادمین',
+    '/update/': 'ویرایش اطلاعات ادمین',
     '/Member/company': 'شرکت ها',
     '/period': 'دوره ها',
     '/Member/OrganizationUnit': ' واحد سازمانی',

@@ -1,16 +1,19 @@
 import { Link, useLocation } from 'react-router-dom';
-import { breadcrumbMappings } from './BreadcrumbMappings'; 
+import { breadcrumbMappings } from './BreadcrumbMappings'; // Adjust the path as needed
 
 const Breadcrumb = () => {
   const { pathname } = useLocation();
 
+  // Function to create breadcrumb items based on the path
   const getBreadcrumbItems = () => {
     const pathParts = pathname.split('/').filter(part => part !== '');
     const breadcrumbItems = [];
 
     pathParts.forEach((part, index) => {
-      const linkPath = `/${pathParts.slice(0, index + 1).join('/')}`;
+      // Create the link path for the current level
+      const linkPath = /${pathParts.slice(0, index + 1).join('/')};
       
+      // Check if the current path matches any mapping and doesn't contain ":id"
       const mappedName = breadcrumbMappings[linkPath];
       if (mappedName && !linkPath.includes(':')) {
         breadcrumbItems.push({
@@ -20,6 +23,7 @@ const Breadcrumb = () => {
       }
     });
 
+    // Ensure to include the last part of the breadcrumb as a non-link item
     if (breadcrumbItems.length > 0) {
       breadcrumbItems[breadcrumbItems.length - 1].isCurrent = true;
     }

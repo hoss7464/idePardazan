@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { breadcrumbMappings } from './BreadcrumbMappings'; 
+import { breadcrumbMappings } from './BreadcrumbMappings'; // Adjust the path as needed
 
 const Breadcrumb = () => {
   const { pathname } = useLocation();

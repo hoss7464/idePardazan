@@ -1,9 +1,10 @@
 import { Link, useLocation } from 'react-router-dom';
-import { breadcrumbMappings } from './BreadcrumbMappings'; 
+import { breadcrumbMappings } from './BreadcrumbMappings'; // Adjust the path as needed
 
 const Breadcrumb = () => {
   const { pathname } = useLocation();
 
+  // Function to create breadcrumb items based on the path
   const getBreadcrumbItems = () => {
     const pathParts = pathname.split('/').filter(part => part !== '');
     const breadcrumbItems = [];
