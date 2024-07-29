@@ -271,7 +271,7 @@ const UpdateUser: React.FC = () => {
         </div>
       )}
 
-      <Breadcrumb pageName="ویرایش کاربر" />
+      <Breadcrumb  />
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark text-sm">
         <div>
           <div className="p-6.5">
