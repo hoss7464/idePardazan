@@ -472,8 +472,6 @@ input[type='number'] {
 .scrollbarr{
   ::-webkit-scrollbar {
     background-color: #3c50e0;
-    width: 8px;
-
 }
 
 ::-webkit-scrollbar-track {
@@ -481,7 +479,6 @@ input[type='number'] {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #808080;
-  width: 4px;
+  background-color: #727272;
 }
 }

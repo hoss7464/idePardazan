@@ -472,7 +472,7 @@ input[type='number'] {
 .scrollbarr{
   ::-webkit-scrollbar {
     background-color: #3c50e0;
-    width: 8px;
+    width: 4px;
 
 }
 

@@ -472,16 +472,12 @@ input[type='number'] {
 .scrollbarr{
   ::-webkit-scrollbar {
     background-color: #3c50e0;
-    width: 8px;
-
 }
 
 ::-webkit-scrollbar-track {
-  background-color: rgb(28 36 52 / var(--tw-bg-opacity));
-}
+  rgb(28 36 52 / var(--tw-bg-opacity))}
 
 ::-webkit-scrollbar-thumb {
-  background-color: #808080;
-  width: 4px;
+  background-color: #1bd5a0;
 }
 }
