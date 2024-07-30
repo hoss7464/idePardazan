@@ -436,7 +436,7 @@ const AssignmentSupervisorIndicator: React.FC = () => {
                                   </th>
                                   {selectedSupervisor && <th
                                     scope="col"
-                                    className="px-6 py-3 text-center text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-2/8"
+                                    className="px-6 py-3 text-center text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-2"
                                   >
                                     عملیات
                                   </th>}

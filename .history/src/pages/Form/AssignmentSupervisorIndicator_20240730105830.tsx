@@ -406,37 +406,37 @@ const AssignmentSupervisorIndicator: React.FC = () => {
                                 <tr>
                                   <th
                                     scope="col"
-                                    className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-1/8"
+                                    className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-5/6"
                                   >
                                     نام
                                   </th>
                                   <th
                                     scope="col"
-                                    className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-1/8"
+                                    className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-5/6"
                                   >
                                     ایمیل
                                   </th>
                                   <th
                                     scope="col"
-                                    className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-1/8"
+                                    className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-5/6"
                                   >
                                     عنوان
                                   </th>
                                   <th
                                     scope="col"
-                                    className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-1/8"
+                                    className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-5/6"
                                   >
                                     شماره همراه
                                   </th>
                                   <th
                                     scope="col"
-                                    className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-1/8"
+                                    className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-5/6"
                                   >
                                     کد پرسنلی
                                   </th>
                                   {selectedSupervisor && <th
                                     scope="col"
-                                    className="px-6 py-3 text-center text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-2/8"
+                                    className="px-6 py-3 text-center text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-1/6"
                                   >
                                     عملیات
                                   </th>}
@@ -461,7 +461,7 @@ const AssignmentSupervisorIndicator: React.FC = () => {
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200 border-zinc-200">
                                       {item.personnel_code}
                                     </td>
-                                    {selectedSupervisor && <td className="flex flex-row	items-center justify-center px-6 py-4 whitespace-nowrap text-end text-sm font-medium border-zinc-200">
+                                    {selectedSupervisor && <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium border-zinc-200">
                                       <button
                                         className="inline-flex align-center items-center justify-center rounded-md bg-green-100 py-2 px-2 text-center font-medium text-white hover:bg-opacity-90 ml-2"
                                         type="button"

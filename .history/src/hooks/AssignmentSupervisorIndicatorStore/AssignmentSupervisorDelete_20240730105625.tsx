@@ -53,7 +53,7 @@ function AssignmentSupervieorDelete() {
       }
 
       const response = await fetch(
-        `https://mqtt-broker.ir/api/admin/evaluation-assignment/supervisor/${supervisor_id}/period/${period_id}/delete`,
+        `https://mqtt-broker.ir/api/admin/evaluation-assignment/evaluation/${supervisor_id}/period/${period_id}/delete`,
         {
           method: 'Delete',
           headers: headers,

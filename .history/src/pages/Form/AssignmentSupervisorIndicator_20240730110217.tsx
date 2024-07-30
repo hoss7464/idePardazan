@@ -406,37 +406,37 @@ const AssignmentSupervisorIndicator: React.FC = () => {
                                 <tr>
                                   <th
                                     scope="col"
-                                    className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-1/8"
+                                    className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-1/6"
                                   >
                                     نام
                                   </th>
                                   <th
                                     scope="col"
-                                    className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-1/8"
+                                    className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-1/6"
                                   >
                                     ایمیل
                                   </th>
                                   <th
                                     scope="col"
-                                    className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-1/8"
+                                    className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-1/6"
                                   >
                                     عنوان
                                   </th>
                                   <th
                                     scope="col"
-                                    className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-1/8"
+                                    className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-1/6"
                                   >
                                     شماره همراه
                                   </th>
                                   <th
                                     scope="col"
-                                    className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-1/8"
+                                    className="px-6 py-3 text-start text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-5/6"
                                   >
                                     کد پرسنلی
                                   </th>
                                   {selectedSupervisor && <th
                                     scope="col"
-                                    className="px-6 py-3 text-center text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-2/8"
+                                    className="px-6 py-3 text-center text-l font-medium text-gray-500 uppercase dark:text-neutral-500 w-1/6"
                                   >
                                     عملیات
                                   </th>}
