@@ -556,7 +556,7 @@ const UpdateUser: React.FC = () => {
                   password,
                 )
               }
-              className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray hover:bg-opacity-90 btnCustmColor"
+              className="flex w-full justify-center w-full xl:w-1/3 rounded bg-primary p-3 font-medium text-gray hover:bg-opacity-90 btnCustmColor"
             >
               ثبت تغییرات
             </button>

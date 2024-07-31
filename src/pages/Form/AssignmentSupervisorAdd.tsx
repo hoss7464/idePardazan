@@ -375,7 +375,7 @@ const AssignmentSupervisorAdd: React.FC = () => {
                             <button
                               type="button"
                               onClick={() => handleDeleteBasedSelected()}
-                              className="flex mt-4.5 mb-4.5 w-full justify-center rounded  p-3 font-medium text-gray hover:bg-opacity-90 bg-red-400	"
+                              className="flex mt-4.5 mb-4.5 w-full justify-center rounded  p-3 font-medium text-gray hover:bg-opacity-90 bg-red-400 "
                             >
                               حذف همه موارد{' '}
                             </button>

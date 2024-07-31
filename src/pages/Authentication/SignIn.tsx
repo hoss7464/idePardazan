@@ -45,19 +45,19 @@ const SignIn: React.FC = () => {
 
       <div className="rounded-sm   bg-white   dark:bg-boxdark">
         <div className="flex flex-wrap items-center flex-col">
-          <div className="hidden w-full xl:block xl:w-1/2">
+          <div className=" w-full xl:block xl:w-1/2">
             <div className="text-center">
-              <Link className="mb-1 inline-block" to="/">
+              <Link className="inline-block" to="/">
                 <img className="hidden dark:block w-60" src={Logo} alt="Logo" />
                 <img className="dark:hidden w-60" src={LogoDark} alt="Logo" />
               </Link>
             </div>
           </div>
 
-          <div className="w-full  xl:w-1/2">
+          <div className="w-full  xl:w-2/5">
             <div className="w-full p-2 sm:p-12.5 xl:p-17.5">
               <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-                ورود به داشبورد
+                ورود به پنل ارزیابی ویسپار
               </h2>
 
               <form>

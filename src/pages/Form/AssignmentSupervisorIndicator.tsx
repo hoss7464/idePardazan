@@ -245,7 +245,8 @@ const AssignmentSupervisorIndicator: React.FC = () => {
 
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark text-sm	">
         <div className="p-6.5">
-          <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
+          <div className="flex flex-col gap-6 xl:flex-row">
+
             <div className="w-full xl:w-1/2">
               <div>
                 <label className="mb-0.5 block text-black dark:text-white">
@@ -293,31 +294,35 @@ const AssignmentSupervisorIndicator: React.FC = () => {
             </div>
           </div>
 
-          <div className="w-full">
-            <div>
-              <label className="mb-0.5 block text-black dark:text-white">
-                ارزیابی
-              </label>
 
-              <div className="relative z-10 bg-white dark:bg-form-input">
-                <CustomSelect
-                  options={dataBasedSupervisor.map((item: any) => ({
-                    label: item.full_name,
-                    value: item.id
-                  }))}
-                  onChange={(selectedOptions) => {
-                    const selectedIds = selectedOptions?.map(option => option.value);
-                    setEmployementList(selectedIds);
-                  }}
-                  placeholder="انتخاب کنید" />
-              </div>
-            </div>
-          </div>
-          <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
+
+          <div className=" flex flex-col gap-6 xl:flex-row">
 
             <div className="w-full xl:w-1/2">
               <div>
                 <label className="mt-5 mb-0.5 block text-black dark:text-white">
+                  ارزیابی
+                </label>
+
+                <div className="relative z-10 bg-white dark:bg-form-input">
+                  <CustomSelect
+                    options={dataBasedSupervisor.map((item: any) => ({
+                      label: item.full_name,
+                      value: item.id
+                    }))}
+                    onChange={(selectedOptions) => {
+                      const selectedIds = selectedOptions?.map(option => option.value);
+                      setEmployementList(selectedIds);
+                    }}
+                    placeholder="انتخاب کنید" />
+                </div>
+              </div>
+
+            </div>
+
+            <div className="w-full xl:w-1/2">
+              <div>
+                <label className="xl:mt-5 mb-0.5 block text-black dark:text-white">
                   شاخص ها
                 </label>
 
@@ -338,10 +343,13 @@ const AssignmentSupervisorIndicator: React.FC = () => {
 
               </div>
             </div>
+          </div>
+
+          <div className="flex flex-col gap-6 xl:flex-row">
 
             <div className="w-full xl:w-1/2">
               <div>
-                <label className="xl:mt-5 mb-0.5 block text-black dark:text-white">
+                <label className="mt-5 mb-0.5 block text-black dark:text-white">
                   گویه ها
                 </label>
 
@@ -362,18 +370,16 @@ const AssignmentSupervisorIndicator: React.FC = () => {
 
               </div>
             </div>
-
-
+            <div className="w-full xl:w-1/2 xl:mt-2 impactWeight">
+              <CustomInput
+                label="وزن شاخص"
+                value={weight}
+                onChange={setWeight}
+                placeholder="وزن شاخص را وارد کنید"
+              />
+            </div>
           </div>
 
-          <div className="w-full xl:w-1/2 mt-2">
-            <CustomInput
-              label="وزن شاخص"
-              value={weight}
-              onChange={setWeight}
-              placeholder="وزن شاخص را وارد کنید"
-            />
-          </div>
 
 
 

@@ -481,7 +481,7 @@ const AddUser: React.FC = () => {
                   password,
                 )
               }
-              className="bg-primary btnCustmColor"
+              className="bg-primary btnCustmColor w-full xl:w-1/3 "
             >
               افزودن کاربر
             </CustomButton>
